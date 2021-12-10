@@ -1,0 +1,17 @@
+apiVersion: skaffold/v2beta25
+kind: Config
+metadata:
+  name: kafka-slurp
+build:
+  tagPolicy:
+    # for now since not yet git controlled
+    dateTime:
+      format: "skaffold-2006-01-02_15-04-05_MST"
+      timezone: "UTC"
+  artifacts:
+  - image: kafka-slurp
+    context: .
+    jib: {}
+deploy:
+  kubectl:
+    manifests: ["k8s/*.yaml"]

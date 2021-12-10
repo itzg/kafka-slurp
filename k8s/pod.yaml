@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kafka-slurp
+  labels:
+    app: kafka-slurp
+spec:
+  containers:
+    - name: kafka-slurp
+      image: kafka-slurp
+      imagePullPolicy: IfNotPresent
+      envFrom:
+        - configMapRef:
+            name: slurp
+        - secretRef:
+            name: slurp-ssl
+            optional: true
+      volumeMounts:
+        - mountPath: /ssl
+          name: ssl-files
+  volumes:
+    - name: ssl-files
+      secret:
+        optional: true
+        secretName: slurp-ssl-files
+  restartPolicy: Never
