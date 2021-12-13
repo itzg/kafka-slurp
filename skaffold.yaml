@@ -4,10 +4,8 @@ metadata:
   name: kafka-slurp
 build:
   tagPolicy:
-    # for now since not yet git controlled
-    dateTime:
-      format: "skaffold-2006-01-02_15-04-05_MST"
-      timezone: "UTC"
+    gitCommit:
+      prefix: "skaffold-"
   artifacts:
   - image: kafka-slurp
     context: .
